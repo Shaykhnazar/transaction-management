@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Transaction Management System</title>
+    <link href="css/datatables.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://code.highcharts.com/css/highcharts.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <div class="flex-container">
+            <!-- Upload -->
+            <div class="flex-item upload-div">
+                <span class="section-title">Upload</span>
+                <div class="upload-area">
+                   <button class="browse-files">
+                       Browse files
+                   </button>
+                   <div class="file-info">
+                       File
+                       <i class="fas fa-info-circle"></i>
+                   </div>
+                    <div class="drop-area">
+                        <div class="drop-text"><i class="fas fa-download upload-icon"></i> Click the file & drop it here (drag & drop)</div>
+                        <form id="uploadForm" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="fileInput" accept=".xlsx,.xls">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Exchange Rates -->
+            <div class="flex-item exchange_rates-div">
+                <span class="section-title">Currency exchange rates</span>
+                <div>Current FX Rates</div>
+                <div>Value in CHF</div>
+                <table id="ratesTable"></table>
+            </div>
+        </div>
+
+        <!-- Bank Accounts -->
+        <div class="container">
+            <div class="flex-item">
+                <span class="section-title">List of bank accounts</span>
+                <table id="accountsTable" class="display cell-border"></table>
+            </div>
+        </div>
+
+        <!-- Balance Chart -->
+        <div class="container">
+            <div class="flex-item">
+                <span class="section-title">Cash forecast</span>
+                <div id="balanceChart" class="chart-display"></div>
+            </div>
+        </div>
+
+        <!-- Transactions -->
+        <div class="container">
+            <div class="flex-item">
+                <span class="section-title">Transactions</span>
+                <table id="transactionsTable" class="display cell-border"></table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/datatables.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
