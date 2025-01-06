@@ -19,10 +19,6 @@ export class FileUploader {
       this.fileInput.click();
     });
 
-    // this.fileInput.addEventListener('change', (e) => {
-    //   this.handleFiles(this.files);
-    // });
-
     // Prevent default drag behaviors
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       this.dropArea.addEventListener(eventName, this.preventDefaults);

@@ -43,6 +43,8 @@ class TransactionAPI {
                 case 'GET:accounts': return $this->getAccounts();
                 case 'GET:transactions': return $this->getTransactions();
                 case 'GET:balances': return $this->getBalances();
+                case 'DELETE:deleteTransaction': return $this->deleteTransaction();
+                case 'PUT:updateTransaction': return $this->updateTransaction();
                 default:
                     http_response_code(404);
                     return ['error' => 'Not found'];
@@ -91,6 +93,38 @@ class TransactionAPI {
 
     private function getBalances() {
         return $this->transactionRepo->getBalances();
+    }
+
+    private function deleteTransaction() {
+        $transactionNo = isset($_GET['transaction_no']) ? $_GET['transaction_no'] : null;
+        if (!$transactionNo) {
+            http_response_code(400);
+            return ['error' => 'Transaction number is required'];
+        }
+
+        if ($this->transactionRepo->delete($transactionNo)) {
+            return ['success' => true];
+        }
+
+        http_response_code(500);
+        return ['error' => 'Failed to delete transaction'];
+    }
+
+    private function updateTransaction() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $transactionNo = isset($_GET['transaction_no']) ? $_GET['transaction_no'] : null;
+
+        if (!$transactionNo || !$data) {
+            http_response_code(400);
+            return ['error' => 'Missing required data'];
+        }
+
+        if ($this->transactionRepo->update($transactionNo, $data)) {
+            return ['success' => true];
+        }
+
+        http_response_code(500);
+        return ['error' => 'Failed to update transaction'];
     }
 }
 

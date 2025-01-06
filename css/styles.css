@@ -22,7 +22,7 @@ body {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 30px;
+    margin: 20px;
     gap: 16px;
     row-gap: 30px;
 }
@@ -62,6 +62,7 @@ body {
     background: #00c853;
     color: white;
     padding: 8px 16px;
+    margin: 2% 0;
     border-radius: 4px;
     border: none;
     cursor: pointer;
@@ -81,10 +82,11 @@ body {
     gap: 2px;
     flex-grow: 1;
     flex-basis: 30px;
+    margin: 2% 0;
 }
 
 .drop-area {
-    border: 2px dashed #ccc;
+    border: 2px dotted #ccc;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -92,7 +94,7 @@ body {
     box-sizing: border-box;
     flex-grow: 5;
     flex-basis: 500px;
-    padding: 10%;
+    padding: 50px;
     margin: 2%;
     transition: border-color 0.3s ease-in-out;
 }
@@ -131,8 +133,8 @@ body {
 /* Add to your styles.css */
 
 /* General table padding */
-#transactionsTable, #accountsTable {
-    padding: 0 20px;
+#accountsTable {
+    padding: 10px 0;
 }
 
 /* Header and cell padding */
@@ -140,9 +142,14 @@ body {
     padding: 12px 16px;
 }
 
+/* Override DataTables container width */
+div.dt-container div.dt-layout-row {
+    width: auto !important;
+}
+
 /* Top controls spacing */
 .dt-layout-row {
-    padding: 10px 0;
+    padding: 0 10px;
 }
 
 /* Buttons spacing */
@@ -182,4 +189,93 @@ body {
 .dt-button-group {
     display: flex;
     align-items: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.editable,
+.delete-btn {
+    cursor: pointer;
+}
+
+.editable:hover {
+    background-color: #f5f5f5;
+}
+
+.editable input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* DataTable Header Styles */
+.display th {
+    background-color: #f0f0f0 !important;  /* Light gray background */
+    color: #333;  /* Darker text for contrast */
+    /*font-weight: 500;  !* Semi-bold text *!*/
+    padding: 12px 8px;  /* Comfortable padding */
+    border: 1px solid #ddd;  /* Light border */
+}
+
+/* Optional: Add hover effect on headers */
+.display th:hover {
+    background-color: #e8e8e8 !important;  /* Slightly darker on hover */
+}
+
+/* Ensure sorting icons are visible against gray background */
+.display th.sorting,
+.display th.sorting_asc,
+.display th.sorting_desc {
+    position: relative;
+}
+
+.display th.sorting:after,
+.display th.sorting_asc:after,
+.display th.sorting_desc:after {
+    color: #666;  /* Darker color for sort icons */
 }

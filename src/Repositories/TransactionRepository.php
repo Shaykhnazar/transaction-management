@@ -68,4 +68,35 @@ class TransactionRepository
         $stmt = $this->db->query("SELECT DISTINCT currency FROM transactions");
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
+
+    public function delete($transactionNo) {
+        $stmt = $this->db->prepare("DELETE FROM transactions WHERE transaction_no = ?");
+        return $stmt->execute([$transactionNo]);
+    }
+
+    public function update($transactionNo, $data) {
+        $allowedFields = ['transaction_no', 'amount', 'date'];
+        $updates = [];
+        $params = [];
+
+        foreach ($data as $field => $value) {
+            if (in_array($field, $allowedFields)) {
+                $updates[] = "$field = ?";
+                $params[] = $value;
+            }
+        }
+
+        if (empty($updates)) {
+            return false;
+        }
+
+        // Add the WHERE clause parameter
+        $params[] = $transactionNo;
+
+        $sql = "UPDATE transactions SET " . implode(', ', $updates) .
+            " WHERE transaction_no = ?";
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($params);
+    }
 }

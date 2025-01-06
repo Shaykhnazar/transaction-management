@@ -7,11 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fileUploader: new FileUploader(
           document.querySelector('.drop-area'),
           document.getElementById('fileInput'),
-          () => app.dataManager.refreshAllData(true)
+          () => app.dataManager.refreshAllData()
         )
     };
-
-    // Initial data load
-    app.dataManager.refreshAllData();
 });
 

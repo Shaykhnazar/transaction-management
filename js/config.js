@@ -5,7 +5,9 @@ export const createConfig = () => {
     ACCOUNTS: 'api/index.php?action=accounts',
     TRANSACTIONS: 'api/index.php?action=transactions',
     BALANCES: 'api/index.php?action=balances',
-    UPDATE_ACCOUNT: 'api/index.php?action=updateAccount'
+    UPDATE_ACCOUNT: 'api/index.php?action=updateAccount',
+    DELETE_TRANSACTION: 'api/index.php?action=deleteTransaction',
+    UPDATE_TRANSACTION: 'api/index.php?action=updateTransaction',
   };
   return {
     API_ENDPOINTS: api,
@@ -64,14 +66,38 @@ export const createConfig = () => {
         },
         columns: [
           { data: 'account_id', title: 'Account' },
-          { data: 'transaction_no', title: 'Transaction No' },
-          { data: 'amount', title: 'Amount' },
+          { data: 'transaction_no', title: 'Transaction No', className: 'editable' },
+          { data: 'amount', title: 'Amount', className: 'editable' },
           { data: 'currency', title: 'Currency' },
-          { data: 'date', title: 'Date' }
+          { data: 'date', title: 'Date', className: 'editable' },
+          {
+            data: null,
+            orderable: false,
+            render: function(data) {
+              return `<button class="delete-btn" data-transaction="${data.transaction_no}">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>`;
+            }
+          }
         ],
         layout: {
           topStart: {
-            buttons: ['excelHtml5', 'pdfHtml5']
+            buttons: [{
+              extend: 'excelHtml5',
+              title: null,
+              exportOptions: {
+                modifier: {
+                  page: 'all'
+                }
+              }
+            },{
+              extend: 'pdfHtml5',
+              exportOptions: {
+                modifier: {
+                  page: 'all'
+                }
+              }
+            }]
           },
           top2Start: {
             pageLength: {
