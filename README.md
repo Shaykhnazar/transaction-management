@@ -57,7 +57,7 @@ A web-based application for managing financial transactions, multiple bank accou
 The system uses three main tables:
 
 ```sql
--- Database dump from database.sql file
+-- Database dump from transactions_app-dump.sql file
 CREATE TABLE `accounts` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -165,9 +165,9 @@ project_root/
 │       └── FileProcessor.php
 ├── public/
 │   ├── css/
-│   ├── js/
-│   └── index.html
+│   └── js/
 ├── config.php
+├── index.html
 ├── vendor/
 └── README.md
 ```
